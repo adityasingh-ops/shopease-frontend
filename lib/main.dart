@@ -6,8 +6,8 @@ import 'package:shopease/Views/entrypoint.dart';
 import 'package:shopease/constants/constants.dart';
 
 Widget defaultHome = MainScreen();
-
 void main() {
+
   runApp(const MyApp());
 }
 
