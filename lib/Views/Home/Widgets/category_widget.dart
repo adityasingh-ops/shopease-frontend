@@ -9,31 +9,32 @@ import 'package:shopease/Views/Categories/all_categories.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/constants/constants.dart';
+import 'package:shopease/models/categories.dart';
 
 // ignore: must_be_immutable
 class CategoryWidget extends StatelessWidget {
    CategoryWidget({
     super.key,
-    this.category,
+    required this.category,
   });
 
-  var category;
+  CategoryModel category;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoryController());
     return GestureDetector(
         onTap: () {
-          if (controller.categoryvalue == category['_id']) {
+          if (controller.categoryvalue == category.id) {
             controller.updateCategory = '';
             controller.updateTitle = '';
-          } else if (category['value'] == 'more') {
+          } else if (category.value == 'more') {
             Get.to(() => const AllCategory(),
                 transition: Transition.fadeIn,
                 duration: const Duration(milliseconds: 500));
           } else{
-            controller.updateCategory = category['_id'];
-            controller.updateTitle = category['title'];
+            controller.updateCategory = category.id;
+            controller.updateTitle = category.title;
           }
         },
         child: Obx(
@@ -43,19 +44,19 @@ class CategoryWidget extends StatelessWidget {
             width: width * 0.19,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              border: Border.all(color: controller.categoryvalue == category['_id'] ? kSecondary: kOffWhite, width: .5.w),
+              border: Border.all(color: controller.categoryvalue == category.id ? kSecondary: kOffWhite, width: .5.w),
             ),
             child: Column(
               children: [
                 SizedBox(
                   height: 35.h,
                   child: Image.network(
-                    category['imageUrl'],
+                    category.imageUrl,
                     fit: BoxFit.contain,
                   ),
                 ),
                 ReusableText(
-                    text: category['title'],
+                    text: category.title,
                     style: appStyle(12, kDark, FontWeight.normal),
                     )
               ],
