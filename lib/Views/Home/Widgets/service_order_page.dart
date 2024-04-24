@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/Views/Home/Widgets/doctor_list.dart';
 import 'package:shopease/constants/constants.dart';
 
-class ServiceOrderPage extends StatelessWidget {
+class ServiceOrderPage extends HookWidget {
   const ServiceOrderPage({super.key});
 
   @override

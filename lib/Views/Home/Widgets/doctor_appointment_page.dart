@@ -8,20 +8,22 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:shopease/Controllers/DoctorController.dart';
 import 'package:shopease/Controllers/item_controller.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/Views/Common/expandable_text.dart';
 import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/constants/constants.dart';
 import 'package:shopease/hooks/fetch_single_item.dart';
+import 'package:shopease/models/doctors.dart';
 import 'package:shopease/models/item_model.dart';
 
-class ItemPage extends HookWidget {
-  const ItemPage({super.key, required this.item});
-  final ItemModel item;
+class DoctorPage extends HookWidget {
+  const DoctorPage(this.doctor, {super.key});
+  final DoctorModel doctor;
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ItemController());
+    final controller = Get.put(DoctorController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -39,10 +41,10 @@ class ItemPage extends HookWidget {
                       bottomRight: Radius.circular(20.r),
 
                     ),
-                    image: controller.itemimage == null
+                    image: controller.doctorImage == null
                         ? null
                         : DecorationImage(
-                            image: CachedNetworkImageProvider(controller.itemimage),
+                            image: CachedNetworkImageProvider(controller.doctorImage),
                             fit: BoxFit.cover,
                           ),
                   )
@@ -80,7 +82,7 @@ class ItemPage extends HookWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ReusableText(
-                            text: controller.itemtitle,
+                            text: controller.doctorName,
                             style: appStyle(20.h, kDark, FontWeight.bold),
                           ),
                           SizedBox(height: 10.h),
@@ -98,7 +100,7 @@ class ItemPage extends HookWidget {
                               ),
                               SizedBox(width: 10.w),
                               ReusableText(
-                                text: controller.itemrating,
+                                text: controller.doctorCertificate,
                                 style: appStyle(15, kDark, FontWeight.w400),
                               ),
                               SizedBox(width: 10.w),
@@ -122,7 +124,7 @@ class ItemPage extends HookWidget {
                                   ),
                                   SizedBox(width: 5.w),
                                   ReusableText(
-                                    text: controller.itemprice,
+                                    text: controller.doctorPatients,
                                     style: appStyle(15, kDark, FontWeight.w400),
                                   ),
                                 ],
@@ -136,7 +138,7 @@ class ItemPage extends HookWidget {
                                   ),
                                   SizedBox(width: 5.w),
                                   ReusableText(
-                                    text: controller.itemprice,
+                                    text: controller.doctorExperience,
                                     style: appStyle(15, kDark, FontWeight.w400),
                                   ),
                                 ],
@@ -150,7 +152,7 @@ class ItemPage extends HookWidget {
                                   ),
                                   SizedBox(width: 5.w),
                                   ReusableText(
-                                      text: controller.itemprice,
+                                      text: controller.doctorPrice,
                                     style: appStyle(15, kDark, FontWeight.w400),
                                   ),
                                 ],
@@ -177,50 +179,10 @@ class ItemPage extends HookWidget {
                     style: appStyle(17.h, kDark, FontWeight.w700),
                   ),
                   ExpandableText(
-                    text: controller.itemdescription,
+                    text: controller.doctorDescription,
                   ),
                   SizedBox(height: 10.h),
-                  Obx(() => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ReusableText(
-                        text: "Quantity",
-                        style: appStyle(15.h, kGray, FontWeight.bold),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: kOffWhite,
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                controller.decrement();
-                              },
-                              icon: Icon(
-                                Icons.remove,
-                                color: kPrimary,
-                              ),
-                            ),
-                            ReusableText(
-                              text: controller.quantity.toString(),
-                              style: appStyle(15.h, kDark, FontWeight.bold),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                controller.increment();
-                              },
-                              icon: Icon(
-                                Icons.add,
-                                color: kPrimary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),),
+                  
                   SizedBox(height: 10.h),
                   
                 ],
@@ -250,7 +212,7 @@ class ItemPage extends HookWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: ReusableText(
-                  text: "Rs.${controller.itemprice}",
+                  text: "Rs.${controller.doctorPrice}",
                   style: appStyle(20.h, kOffWhite, FontWeight.w700),
                 ),
               ),
