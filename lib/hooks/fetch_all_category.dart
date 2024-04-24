@@ -5,7 +5,7 @@ import 'package:shopease/models/hook_models/hook_result.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
 
-FetchHook useFetchCategories() {
+FetchHook useFetchAllCategories() {
   final categoriesItems = useState<List<CategoryModel>?>(null);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
@@ -14,7 +14,7 @@ FetchHook useFetchCategories() {
   Future<void> fetchData() async{
     isLoading.value = true;
     try {
-      Uri url = Uri.parse('$appBaseUrl/api/category/random');
+      Uri url = Uri.parse('$appBaseUrl/api/category');
       final response = await http.get(url);
       if (response.statusCode == 200) {
         categoriesItems.value = categoryModelFromJson(response.body);
@@ -31,7 +31,7 @@ FetchHook useFetchCategories() {
   useEffect(() {
     fetchData();
     return null;
-  }, []);
+  }, const []);
   
   void refetch() {
     isLoading.value = true;

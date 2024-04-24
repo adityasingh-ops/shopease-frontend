@@ -16,7 +16,7 @@ class ItemModel {
     final String store;
     final double rating;
     final int ratingCount;
-    final List<String> imageUrl;
+    final String imageUrl;
     final String description;
     final double price;
     final List<Additive> additives;
@@ -51,7 +51,7 @@ class ItemModel {
         store: json["store"],
         rating: json["rating"]?.toDouble(),
         ratingCount: json["ratingCount"],
-        imageUrl: List<String>.from(json["imageUrl"].map((x) => x)),
+        imageUrl: json["imageUrl"],
         description: json["description"],
         price: json["price"]?.toDouble(),
         additives: List<Additive>.from(json["additives"].map((x) => Additive.fromJson(x))),
@@ -69,7 +69,7 @@ class ItemModel {
         "store": store,
         "rating": rating,
         "ratingCount": ratingCount,
-        "imageUrl": List<dynamic>.from(imageUrl.map((x) => x)),
+        "imageUrl": imageUrl,
         "description": description,
         "price": price,
         "additives": List<dynamic>.from(additives.map((x) => x.toJson())),

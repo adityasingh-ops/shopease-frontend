@@ -20,5 +20,5 @@ double hieght = 825.h;
 double width = 375.w;
 
 
-const String appBaseUrl = "http://localhost:5435";
+const String appBaseUrl = "http://10.0.2.2:5435";
 

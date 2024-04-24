@@ -1,12 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:shopease/Controllers/category_controller.dart';
+import 'package:shopease/Controllers/item_controller.dart';
+import 'package:shopease/Controllers/store_controller.dart';
 import 'package:shopease/constants/constants.dart';
 import 'package:shopease/models/api_error.dart';
-import 'package:shopease/models/categories.dart';
-import 'package:shopease/models/hook_models/hook_result.dart';
+import 'package:shopease/models/hook_models/hook_items.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopease/models/item_model.dart';
 
-FetchHook useFetchCategories() {
-  final categoriesItems = useState<List<CategoryModel>?>(null);
+FetchItems useFetchItems() {
+  final controller = Get.put(ItemController());
+  final allitems = useState<List<ItemModel>?>(null);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final apiError = useState<ApiError?>(null);
@@ -14,21 +21,21 @@ FetchHook useFetchCategories() {
   Future<void> fetchData() async{
     isLoading.value = true;
     try {
-      Uri url = Uri.parse('$appBaseUrl/api/category/random');
+      Uri url = Uri.parse('$appBaseUrl/api/item/byId/${controller.itemvalue}');
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        categoriesItems.value = categoryModelFromJson(response.body);
+        allitems.value = itemModelFromJson(response.body);
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
     } catch (e) {
-      error.value = e as Exception;
+      debugPrint(e.toString());
     } finally {
       isLoading.value = false;
     }
   }
-
   useEffect(() {
+    Future.delayed(const Duration(seconds: 3));
     fetchData();
     return null;
   }, []);
@@ -38,8 +45,8 @@ FetchHook useFetchCategories() {
     fetchData();
   }
 
-  return FetchHook(
-      data: categoriesItems.value,
+  return FetchItems(
+      data: allitems.value,
       isLoading: isLoading.value,
       error: error.value,
       refetch: refetch);

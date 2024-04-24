@@ -6,9 +6,10 @@ import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/constants/constants.dart';
 
 class Heading extends StatelessWidget {
-  Heading({super.key, required this.text, this.onTap});
+  Heading({super.key, required this.text, this.onTap, this.more});
   final String text;
   void Function()? onTap;
+  final bool? more;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,10 +22,16 @@ class Heading extends StatelessWidget {
             child: ReusableText(
                 text: text, style: appStyle(16, kDark, FontWeight.bold)),
           ),
+          more == null ?
           GestureDetector(
             onTap: onTap,
-            child:Icon(AntDesign.appstore1, color: kSecondary, size: 20.sp),
-            ),
+            child:
+                Icon(
+                  AntDesign.appstore1,
+                  color: kSecondary,
+                  size: 20.sp,
+                ),
+          ): const SizedBox.shrink()
         ],
       ),
     );

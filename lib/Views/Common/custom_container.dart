@@ -4,12 +4,13 @@ import 'package:shopease/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CustomContainer extends StatelessWidget {
-   CustomContainer({super.key, required this.containerContent});
+   CustomContainer({super.key, required this.containerContent,this.color});
   Widget containerContent;
+  Color ? color;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.76,
+      height: MediaQuery.of(context).size.height * 0.75,
       width:width,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -18,7 +19,7 @@ class CustomContainer extends StatelessWidget {
         ),
         child: Container(
           width: width,
-          color: kOffWhite,
+          color: color??kOffWhite,
           child: SingleChildScrollView(
             child:containerContent,
           ),

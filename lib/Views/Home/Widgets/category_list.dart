@@ -16,7 +16,7 @@ class CategoryList extends HookWidget {
     final isLoading = hookResult.isLoading;
     final error = hookResult.error;
     return Container(
-      height: 81.h,
+      height: 82.h,
       padding: EdgeInsets.only(left: 12.w, top: 10.h),
       child: isLoading
           ? const CatergoriesShimmer()

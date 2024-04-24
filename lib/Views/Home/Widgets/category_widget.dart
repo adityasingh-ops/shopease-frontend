@@ -22,7 +22,7 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CategoryController());
+     final controller = Get.put(CategoryController());
     return GestureDetector(
         onTap: () {
           if (controller.categoryvalue == category.id) {

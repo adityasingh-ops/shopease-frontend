@@ -13,7 +13,6 @@ class StoreModel {
     final List<dynamic> foods;
     final bool pickup;
     final bool delivery;
-    final bool isAvaoilable;
     final String owner;
     final String code;
     final String logoUrl;
@@ -22,6 +21,7 @@ class StoreModel {
     final String verification;
     final String verificationmessage;
     final Coords coords;
+     bool ? isAvailable;
 
     StoreModel({
         required this.id,
@@ -32,7 +32,6 @@ class StoreModel {
         required this.foods,
         required this.pickup,
         required this.delivery,
-        required this.isAvaoilable,
         required this.owner,
         required this.code,
         required this.logoUrl,
@@ -41,6 +40,7 @@ class StoreModel {
         required this.verification,
         required this.verificationmessage,
         required this.coords,
+        this.isAvailable,
     });
 
     factory StoreModel.fromJson(Map<String, dynamic> json) => StoreModel(
@@ -52,7 +52,6 @@ class StoreModel {
         foods: List<dynamic>.from(json["foods"].map((x) => x)),
         pickup: json["pickup"],
         delivery: json["delivery"],
-        isAvaoilable: json["isAvaoilable"],
         owner: json["owner"],
         code: json["code"],
         logoUrl: json["logoUrl"],
@@ -61,6 +60,7 @@ class StoreModel {
         verification: json["verification"],
         verificationmessage: json["verificationmessage"],
         coords: Coords.fromJson(json["coords"]),
+        isAvailable: json["isAvailable"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -72,7 +72,6 @@ class StoreModel {
         "foods": List<dynamic>.from(foods.map((x) => x)),
         "pickup": pickup,
         "delivery": delivery,
-        "isAvaoilable": isAvaoilable,
         "owner": owner,
         "code": code,
         "logoUrl": logoUrl,
@@ -81,6 +80,7 @@ class StoreModel {
         "verification": verification,
         "verificationmessage": verificationmessage,
         "coords": coords.toJson(),
+        "isAvailable": isAvailable,
     };
 }
 

@@ -1,12 +1,12 @@
 import 'package:shopease/constants/constants.dart';
 import 'package:shopease/models/api_error.dart';
-import 'package:shopease/models/categories.dart';
 import 'package:shopease/models/hook_models/hook_result.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopease/models/stores_model.dart';
 
-FetchHook useFetchCategories() {
-  final categoriesItems = useState<List<CategoryModel>?>(null);
+FetchHook useFetchAllStore(String type, String code) {
+  final allstore = useState<List<StoreModel>?>(null);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final apiError = useState<ApiError?>(null);
@@ -14,10 +14,10 @@ FetchHook useFetchCategories() {
   Future<void> fetchData() async{
     isLoading.value = true;
     try {
-      Uri url = Uri.parse('$appBaseUrl/api/category/random');
+      Uri url = Uri.parse('$appBaseUrl/api/store/all/$type/$code');
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        categoriesItems.value = categoryModelFromJson(response.body);
+        allstore.value = storeModelFromJson(response.body);
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
@@ -27,7 +27,6 @@ FetchHook useFetchCategories() {
       isLoading.value = false;
     }
   }
-
   useEffect(() {
     fetchData();
     return null;
@@ -39,7 +38,7 @@ FetchHook useFetchCategories() {
   }
 
   return FetchHook(
-      data: categoriesItems.value,
+      data: allstore.value,
       isLoading: isLoading.value,
       error: error.value,
       refetch: refetch);
