@@ -4,6 +4,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:shopease/Controllers/item_controller.dart';
 import 'package:shopease/Controllers/tab_index_controller.dart';
 import 'package:shopease/Views/Cart/cart_page.dart';
 import 'package:shopease/Views/Home/home_page.dart';
@@ -25,6 +26,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(TabIndexController());
+    final itemcontroller = Get.put(ItemController());
     return Obx(() => Scaffold(
       body: Stack(
         children: [
@@ -53,7 +55,7 @@ class MainScreen extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     icon: Badge(
-                      label: const Text('1'),
+                      label: Text('${itemcontroller.totalItems}'),
                       child: const Icon(FontAwesome.opencart),
                     ),
                     label: 'Cart',
