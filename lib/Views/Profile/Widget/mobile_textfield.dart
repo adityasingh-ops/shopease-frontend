@@ -1,32 +1,36 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/constants/constants.dart';
 
-class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({super.key,required this.controller});
-  
+class PhoneTextField extends StatelessWidget {
+  const PhoneTextField({super.key, this.onEditingComplete, this.keyboardType, this.initialValue,required this.controller, required this.hintText, required this.prefixIcon});
+  final void Function()? onEditingComplete;
+  final TextInputType? keyboardType;
+  final String? initialValue;
   final TextEditingController? controller;
-
+  final String hintText;
+  final Widget prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: kDark,
+      initialValue: initialValue,
       textInputAction: TextInputAction.next,
-      keyboardType: TextInputType.visiblePassword,
+      keyboardType: keyboardType ?? TextInputType.emailAddress,
+      onEditingComplete: onEditingComplete,
       controller: controller,
       validator: (value){
         if(value!.isEmpty){
-          return "Password cannot be empty";
+          return "It cannot be empty";
         }
         return null;
       },
       style: appStyle(12, kGray, FontWeight.normal),
       decoration: InputDecoration(
-        hintText:"Password",
-        prefixIcon: Icon(CupertinoIcons.lock_circle, size: 22,),
+        hintText:hintText,
+        prefixIcon: prefixIcon,
         isDense: true,
         contentPadding: EdgeInsets.all(6.h),
         hintStyle: appStyle(12, kGray, FontWeight.normal),

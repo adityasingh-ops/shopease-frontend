@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -27,6 +28,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(TabIndexController());
     final itemcontroller = Get.put(ItemController());
+    
     return Obx(() => Scaffold(
       body: Stack(
         children: [
@@ -34,6 +36,7 @@ class MainScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child:Theme(data: Theme.of(context).copyWith(canvasColor: kPrimary),
+             
              child: BottomNavigationBar(
               showSelectedLabels: false,
               elevation: 0,
@@ -54,8 +57,9 @@ class MainScreen extends StatelessWidget {
                     label: 'Search',
                   ),
                   BottomNavigationBarItem(
+                    
                     icon: Badge(
-                      label: Text('${itemcontroller.totalItems}'),
+                      label: Text('${itemcontroller.count}'),
                       child: const Icon(FontAwesome.opencart),
                     ),
                     label: 'Cart',

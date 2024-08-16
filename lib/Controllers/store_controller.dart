@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -8,6 +9,7 @@ class StoreController extends GetxController {
   RxString _image = ''.obs;
   RxString _time = ''.obs;
   RxString _rating = ''.obs;
+  RxBool _isAvailable = true.obs;
 
 
   String get storetitle => _title.value;
@@ -15,6 +17,7 @@ class StoreController extends GetxController {
   String get storevalue => _store.value;
   String get storetime => _time.value;
   String get storerating => _rating.value;
+  bool get storeavailability => _isAvailable.value;
   set updateStore(String value) {
     _store.value = value;
   }
@@ -32,5 +35,8 @@ class StoreController extends GetxController {
   }
   set updateRating(String value) {
     _rating.value = value;
+  }
+  set updateAvailability(bool value) {
+    _isAvailable.value = value;
   }
 }

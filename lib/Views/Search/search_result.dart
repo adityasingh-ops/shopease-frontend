@@ -9,7 +9,7 @@ import 'package:shopease/models/item_model.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SearchItemController());
@@ -17,11 +17,12 @@ class SearchResult extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(12.w, 10.h, 12.h, 0),
       height: hieght,
       child: ListView.builder(
-        itemCount: controller.searchResults!.length,
-        itemBuilder: (context,i){
-          ItemModel item = controller.searchResults![i];
-          return ItemTile(items:item);
-        }),
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: controller.searchResults!.length,
+          itemBuilder: (context, i) {
+            ItemModel item = controller.searchResults![i];
+            return ItemTile(items: item);
+          }),
     );
   }
 }

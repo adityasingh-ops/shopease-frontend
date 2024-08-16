@@ -2,21 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopease/Controllers/login_controller.dart';
+import 'package:shopease/Controllers/otp_controller.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/Views/Common/custom_container.dart';
 import 'package:shopease/Views/Common/profile_appbar.dart';
 import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/Views/Profile/Widget/login_page.dart';
+import 'package:shopease/Views/Profile/Widget/map_page.dart';
 import 'package:shopease/Views/Profile/Widget/profile_tile.dart';
 import 'package:shopease/constants/constants.dart';
+import 'package:shopease/models/loginresponse.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  void _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('isRegistered');
+    Get.to(() => LoginPage());
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OtpController());
+    final box = GetStorage();
+    String? token = box.read('token');
+    LoginresponseModel? user;
+
+    if (token != null) {
+      user = controller.getuserinfo();
+    }
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: PreferredSize(
@@ -51,11 +73,11 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ReusableText(
-                              text: "Username",
-                              style: appStyle(16, kGray, FontWeight.bold)),
+                              text: user!.username,
+                              style: appStyle(16.h, kGray, FontWeight.bold)),
                           ReusableText(
-                              text: "usernama@gmail.com",
-                              style: appStyle(12, kGray, FontWeight.normal)),
+                              text: user.number,
+                              style: appStyle(12.h, kGray, FontWeight.normal)),
                         ],
                       ),
                     ),
@@ -146,11 +168,17 @@ class ProfilePage extends StatelessWidget {
               minimumSize: Size(200.w, 40.h),
             ),
             onPressed: () {
-              // logout functionality
+              Get.to(() => MapPage());
+              
             },
-            child: ReusableText(
-              text: "Logout",
-              style: appStyle(16, kLightWhite, FontWeight.bold),
+            child: GestureDetector(
+              onTap: (){
+                _logout();
+              },
+              child: ReusableText(
+                text: "Logout",
+                style: appStyle(16, kLightWhite, FontWeight.bold),
+              ),
             ),)
         ],
       ))),

@@ -22,12 +22,17 @@ class GrocceryStoreTile extends StatelessWidget {
     final controller = Get.put(StoreController());
     return GestureDetector(
          onTap: () {
+               if(store.isAvailable == true || store.isAvailable == null){
                 Get.to(()=>ItemList());
                 controller.updateStore = store.id;
                 controller.updateTitle = store.title;
                 controller.updateImage = store.imageUrl;
                 controller.updateTime = store.time;
                 controller.updateRating = "kfjs";
+                controller.updateAvailability = store.isAvailable!;}
+                else{
+                  Get.snackbar("Sorry", "This store is closed");
+                }
               },
       child: Stack(
         clipBehavior: Clip.hardEdge,

@@ -38,35 +38,44 @@ class _SearchPageState extends State<SearchPage> {
                 controller: _searchController,
                 hinttext: "Search your product",
                 obscureText: false,
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    if (controller.isTriggered == false) {
-                      controller.setSearchResults(_searchController.text);
-                      controller.setTriggered = true;
-                    } else {
-                      controller.searchResults = null;
-                      controller.setTriggered = false;
-                      _searchController.clear();
-                    }
-                  },
-                  child: controller.isTriggered== false
-                      ? Icon(
-                          Ionicons.search_circle,
-                          size: 40.h,
-                          color: kPrimary,
-                        )
-                      : Icon(
-                          Ionicons.close_circle,
-                          color: kRed,
-                          size: 40.h,
-                        ),
-                ),
+                onChanged: (value) {
+                 
+                    if (value.isEmpty) {
+    _searchController.clear();// Reset search results to null
+  } else {
+    controller.setSearchResults(value); // Set search results
+  }
+                  
+                },
+                // suffixIcon: GestureDetector(
+                //   onTap: () {
+                //     if (controller.isTriggered == false) {
+                //       controller.setSearchResults(_searchController.text);
+                //       controller.setTriggered = true;
+                //     } else {
+                //       controller.searchResults = null;
+                //       controller.setTriggered = false;
+                //       _searchController.clear();
+                //     }
+                //   },
+                //   child: controller.isTriggered == false
+                //       ? Icon(
+                //           Ionicons.search_circle,
+                //           size: 40.h,
+                //           color: kPrimary,
+                //         )
+                //       : Icon(
+                //           Ionicons.close_circle,
+                //           color: kRed,
+                //           size: 40.h,
+                //         ),
+                // ),
               ),
             ),
           ),
           body: SafeArea(
               child: CustomContainer(
-                color: Colors.white,
+                  color: Colors.white,
                   containerContent: controller.isLoading
                       ? const FoodsListShimmer()
                       : controller.searchResults == null

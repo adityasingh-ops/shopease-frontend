@@ -4,10 +4,11 @@ import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/constants/constants.dart';
 
 class CustomTextWidget extends StatelessWidget {
-  const CustomTextWidget({super.key, required this.keyboardType, required this.controller, this.onEditingComplete, required this.obscureText, this.suffixIcon, this.validator, this.prefixIcon, required this.hinttext});
+  const CustomTextWidget({super.key, required this.keyboardType, required this.controller, this.onEditingComplete, required this.obscureText, this.suffixIcon, this.validator, this.prefixIcon, required this.hinttext, this.onChanged});
   final TextInputType keyboardType;
   final TextEditingController controller;
   final void Function()? onEditingComplete;
+  final void Function(String)? onChanged;
   final  bool obscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -24,9 +25,11 @@ class CustomTextWidget extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        
         keyboardType: keyboardType,
         onEditingComplete: onEditingComplete,
         obscureText: obscureText ?? false,
+        onChanged: onChanged,
         cursorHeight: 20.h,
         style: appStyle(11, kDark, FontWeight.normal),
         decoration: InputDecoration(

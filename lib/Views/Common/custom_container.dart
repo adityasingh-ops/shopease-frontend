@@ -4,16 +4,19 @@ import 'package:shopease/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CustomContainer extends StatelessWidget {
-   CustomContainer({super.key, required this.containerContent,this.color});
+   CustomContainer({super.key, required this.containerContent,this.color,this.height,this.borderRadius,this.oppositeBorderRadius});
   Widget containerContent;
   Color ? color;
+  double ? height;
+  BorderRadius ? borderRadius;
+  BorderRadius? oppositeBorderRadius;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.75,
+      height: height??MediaQuery.of(context).size.height * 0.75,
       width:width,
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: borderRadius??BorderRadius.only(
           bottomLeft: Radius.circular(30.r),
           bottomRight: Radius.circular(30.r),
         ),

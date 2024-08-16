@@ -8,9 +8,8 @@ class ItemController extends GetxController {
   RxString _rating = ''.obs;
   RxString _description = ''.obs;
   RxInt _quantity = 0.obs;
+  RxInt _label = 0.obs;
 
-  RxList<Map<String, dynamic>> _cartItems = RxList<Map<String, dynamic>>([]);
-  RxInt _totalItems = 0.obs;
 
   String get itemtitle => _title.value;
   String get itemimage => _image.value;
@@ -19,8 +18,8 @@ class ItemController extends GetxController {
   String get itemrating => _rating.value;
   String get itemdescription => _description.value;
   int get itemquantity => _quantity.value;
-  List<Map<String, dynamic>> get cartItems => _cartItems;
-  int get totalItems => _totalItems.value;
+  int get itemlabel => _label.value;
+
 
   set updateItem(String value) {
     _item.value = value;
@@ -45,71 +44,24 @@ class ItemController extends GetxController {
   set updateDescription(String value) {
     _description.value = value;
   }
+  
+  set updateQuantity(int value) {
+    _quantity.value = value;}
+   
+   RxInt count = 1.obs;
 
-  get quantity => _quantity.value;
+   void increment() {
+     count.value++;
+   }
 
-  int checkQuantity(int quantity) {
-    if (quantity < 0) {
-      return 0;
-    }
-    if (quantity > 20) {
-      return 20;
-    } else {
-      return quantity;
-    }
-  }
+   void decrement() {
+     if (count.value > 1) {
+      count.value--;
+     }
+   }
+ 
 
-  int increment() {
-    _quantity.value = checkQuantity(_quantity.value + 1);
-    return _quantity.value;
-  }
+ 
 
-  int decrement() {
-    _quantity.value = checkQuantity(_quantity.value - 1);
-    return _quantity.value;
-  }
-
-  void addToCart(Map<String, dynamic> item) {
-    int index = _cartItems.indexWhere((cartItem) => cartItem['id'] == item['id']);
-
-    if (index != -1) {
-      // Item already in cart, update quantity
-      _cartItems[index]['quantity'] += 1;
-    } else {
-      // Add new item to cart
-      item['quantity'] = 1;
-      _cartItems.add(item);
-    }
-
-    _updateTotalItems();
-  }
-
-  void removeFromCart(Map<String, dynamic> item) {
-    int index = _cartItems.indexWhere((cartItem) => cartItem['id'] == item['id']);
-
-    if (index != -1) {
-      if (_cartItems[index]['quantity'] > 1) {
-        // Decrement quantity
-        _cartItems[index]['quantity'] -= 1;
-      } else {
-        // Remove item from cart
-        _cartItems.removeAt(index);
-      }
-
-      _updateTotalItems();
-    }
-  }
-
-  void clearCart() {
-    _cartItems.clear();
-    _totalItems.value = 0;
-  }
-
-  void _updateTotalItems() {
-    int totalQuantity = 0;
-    for (var cartItem in _cartItems) {
-      totalQuantity += cartItem['quantity'] as int;
-    }
-    _totalItems.value = totalQuantity;
-  }
+  
 }

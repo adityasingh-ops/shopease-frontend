@@ -17,8 +17,10 @@ class StoreTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-         Get.to(()=>OrderPage());
-      },
+  (restaurant.isAvailable == true || restaurant.isAvailable == null) 
+      ? Get.to(() => OrderPage()) 
+      : Get.snackbar("Sorry", "This store is closed");
+},
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [

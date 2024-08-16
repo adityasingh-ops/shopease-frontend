@@ -92,9 +92,9 @@ class ItemList extends HookWidget {
                       borderRadius: BorderRadius.circular(20.h),
                       boxShadow: [
                         BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 5,
+                    color: Colors.black.withOpacity(0.2.h),
+                    spreadRadius: 1.h,
+                    blurRadius: 5.h,
                     offset: const Offset(0, 5),
                   ),
                   const BoxShadow(
@@ -116,7 +116,7 @@ class ItemList extends HookWidget {
                             text: controller.storetitle,
                             style: appStyle(20.h, kDark, FontWeight.bold),
                           ),
-                          SizedBox(height: 10.h),
+                          SizedBox(height: 8.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -129,19 +129,19 @@ class ItemList extends HookWidget {
                                   );
                                 }),
                               ),
-                              SizedBox(width: 10.w),
+                              SizedBox(width: 8.h),
                               ReusableText(
                                 text: controller.storerating,
                                 style: appStyle(15, kDark, FontWeight.w400),
                               ),
-                              SizedBox(width: 10.w),
+                              SizedBox(width: 8.w),
                               ReusableText(
                                 text: "comments",
                                 style: appStyle(15, kDark, FontWeight.w400),
                               ),
                             ],
                           ),
-                          SizedBox(height: 10.h),
+                          SizedBox(height: 7.3.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

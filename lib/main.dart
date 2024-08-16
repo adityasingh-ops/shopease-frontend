@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'package:shopease/Views/entrypoint.dart';
+import 'package:shopease/Views/splashscreen.dart';
 import 'package:shopease/constants/constants.dart';
 
-Widget defaultHome = MainScreen();
-void main() {
-
+Widget defaultHome = const SplashScreen();
+void main() async {
+  await GetStorage.init(); 
   runApp(const MyApp());
 }
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           ),
           home: child,
         );
-      },
+      },  
       child: defaultHome,
     );
   }
