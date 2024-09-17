@@ -6,16 +6,16 @@ import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:provider/provider.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopease/Controllers/login_controller.dart';
+
 import 'package:shopease/Controllers/otp_controller.dart';
 import 'package:shopease/Views/Common/appstyle.dart';
 import 'package:shopease/Views/Common/custom_container.dart';
 import 'package:shopease/Views/Common/profile_appbar.dart';
 import 'package:shopease/Views/Common/reusable_text.dart';
 import 'package:shopease/Views/Profile/Widget/login_page.dart';
-import 'package:shopease/Views/Profile/Widget/map_page.dart';
+
 import 'package:shopease/Views/Profile/Widget/profile_tile.dart';
 import 'package:shopease/constants/constants.dart';
 import 'package:shopease/models/loginresponse.dart';
@@ -168,7 +168,7 @@ class ProfilePage extends StatelessWidget {
               minimumSize: Size(200.w, 40.h),
             ),
             onPressed: () {
-              Get.to(() => MapPage());
+              // _logout();
               
             },
             child: GestureDetector(
